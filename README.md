@@ -8,4 +8,4 @@ Run Demo.m to simulate Figure 4 of the paper, which contains dynamic approximati
 
 Run Demo_Exact_Computation.m for exact computation, i.e target tracking with an extended Kalman filter without any approximation.
 
-These filtering approaches model a target circular movement.
+These filtering approaches model circular motion for a target.
