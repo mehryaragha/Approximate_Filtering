@@ -12,8 +12,7 @@
 Demo_Exact_Computation;
 
 % Kullback–Leibler (KL) threshold 0.5
-my_KL_thresh = 0.5;
-Dynamic_approximation(my_KL_thresh);
+my_KL_thresh = 0.5; Dynamic_approximation(my_KL_thresh);
 
 % KL threshold 1
 my_KL_thresh = 1;

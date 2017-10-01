@@ -1,13 +1,16 @@
 % Written by: Mehryar Emambakhsh
 % Email: mehryar_emam@yahoo.com
-% Date: 01 Oct 2017
+% Date: 27 Sep 2017
 % Paper:
 % P. Garcia, M. Emambakhsh, A. Wallace, “Learning to Approximate Computing at Run-time,”
 % in IET 3rd International Conference on Intelligent Signal Processing (ISP
 % 2017), 2017, to appear.
-function [all_ERR, all_KL, all_energy, app_level_hist] = Dynamic_approximation(my_KL_thresh)
+function [all_ERR, all_KL, all_energy, app_level_hist] = Dynamic_approximation_detailed_visualisation(my_KL_thresh)
 % This function performs dynamic approximation using the given KL threshold
 % as input.
+% Compared to Dynamic_approximation.m, it provides more detailed 
+% visualisation of the compromisation between the approximation level, 
+% power consumtion and tracking error.
 % my_KL_thresh: 1 X 1 scalar
 warning off
 clc
@@ -107,7 +110,9 @@ for iter_cnt = 1: 365
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     %%%%%%%%%%%%%%%% Plotting step
+    
     if mod(iter_cnt, 1) == 0
+        subplot(1, 2, 1)
         Concat_to_plot = [Concat_to_plot, X_true_t];
         EndToPlot = 40;
         if size(Concat_to_plot, 2) < EndToPlot
@@ -128,7 +133,6 @@ for iter_cnt = 1: 365
 %         hold off
         xlim([min_x, max_x]), ylim([min_y, max_y])
         drawnow
-        
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
@@ -172,6 +176,27 @@ for iter_cnt = 1: 365
         myErr = sqrt(sum(([x_true_t; y_true_t] - X_k(1: 2)).^2));
         all_ERR = [all_ERR, myErr];
         all_KL = [all_KL, curr_KL_output];
+        
+        %%%%% Plotting the energy, error and approximation level as bar
+        %%%%% graph
+        subplot(1, 2, 2)
+        bar1 = bar(1, 100* curr_app_level/ length(app_levels));
+        hold on
+        bar2 = bar(2, 100* energy_vector(curr_app_level)/max(energy_vector));
+        hold off
+        set(bar1, 'FaceColor', 'green');
+        set(bar2, 'FaceColor', 'red');
+        
+        set(gca, 'XTick', [1, 2])
+        set(gca, 'XTickLabel', {'Approximation level', 'Power'})
+        
+        ylabel('Percent (%)')
+        ylim([1, 100])
+        legend('Approximation level', 'Power')
+        title(sprintf('Normalised Approximation level and \n its corrsponding power consumtion'))
+        drawnow
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 end
