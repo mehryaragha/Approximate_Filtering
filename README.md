@@ -13,7 +13,7 @@ Also, please run Demo_Exact_Computation.m for exact computation, i.e target trac
 @inproceedings{Emambakhsh:2017,
   title={Learning to approximate computing at run-time},
   author={P. Garcia, M. Emambakhsh and A. Wallace},
-  booktitle={IET $3^{rd}$ International Conference on Intelligent Signal Processing (ISP)},
+  booktitle={IET 3rd International Conference on Intelligent Signal Processing (ISP)},
   pages={1--8},
   year={2017}
 }
